@@ -5,6 +5,11 @@ This repository holds the code, configuration, and manuscript documentation for 
 
 Epigenetic aging clocks based on DNA methylation patterns across the genome have emerged as a potential biomarker for risk of age-related diseases, like Alzheimer’s disease (AD), and environmental and social stressors. However, methylation clocks have not been comprehensively validated in genetically diverse individuals. Here we evaluate a set of first-, second-, and third-generation methylation clocks in 621 AD patients and matched controls from African American, Hispanic, and White cohorts. 
 
+### Citation & Publication Reference
+Our work is published in *eLife*:  
+**"Methylation Clocks Fail to Generalize Across Genetically Admixed Individuals"**  
+Article DOI/Link: [https://doi.org/10.7554/eLife.105343.2](https://doi.org/10.7554/eLife.105343.2)
+
 ---
 
 ## Directory Structure
@@ -67,7 +72,8 @@ conda activate methyl-clocks-admixture
 ## Data Acquisition & Preparation
 
 ### 1. Methylation Datasets
-The whole-blood DNA methylation datasets used in the replication analyses are publicly accessible via the NCBI Gene Expression Omnibus (GEO) portal:
+The whole-blood DNA methylation datasets used in the analyses are publicly accessible via the NCBI Gene Expression Omnibus (GEO) portal:
+- **MAGENTA Cohort:** [GSE338167](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE338167)
 - **Grady Trauma Project:** [GSE72680](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE72680)
 - **GENOA Study:** [GSE210254](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE210254)
 - **Swedish Cohort:** [GSE87571](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE87571)
@@ -76,7 +82,6 @@ The whole-blood DNA methylation datasets used in the replication analyses are pu
 Global ancestry proportions calculated from genotyping data for the MAGENTA cohorts are provided in this repository under:
 - `data/genotyping_data/AA_ancestry_proportions.txt`
 - `data/genotyping_data/HISPANIC_ancestry_proportions.txt`
-- `data/genotyping_data/NHW_ancestry_proportions.txt`
 
 ### 3. meQTL and gnomAD Variant Data
 - Population-specific variants and allele frequencies can be downloaded from the [gnomAD Browser (v3.0 / v4.1)](https://gnomad.broadinstitute.org/).

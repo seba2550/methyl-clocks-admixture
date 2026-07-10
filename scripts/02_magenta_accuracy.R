@@ -16,13 +16,12 @@ bio_age <- read.csv("data/bio_age_estimates_magenta_age_diff_metadata.csv", row.
 
 # Read in the global ancestry proportions
 AA_global_anc <- read.table("data/genotyping_data/AA_ancestry_proportions.txt", header = T)
-NHW_global_anc <- read.table("data/genotyping_data/NHW_ancestry_proportions.txt", header = T)
 HISP_global_anc <- read.table("data/genotyping_data/HISPANIC_ancestry_proportions.txt", header = T)
 
 # tmp <- read_xlsx("AANHW_472_id4genotyping.xlsx")
 
-# Merge the three ancestry proportion tables together
-global_anc <- rbind(AA_global_anc, NHW_global_anc, HISP_global_anc)
+# Merge the ancestry proportion tables together (NHW is omitted as it is non-admixed/baseline)
+global_anc <- rbind(AA_global_anc, HISP_global_anc)
 
 # sample_metadata <- read_xlsx("ADmethy_pheno.xlsx")
 # methylation_meta <- subset(sample_metadata, sample_metadata$Beta_ID %in% colnames(normalized_combined))
