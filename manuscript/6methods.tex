@@ -1,0 +1,92 @@
+\section{Methods}
+
+
+\subsection{MAGENTA study}
+\subsubsection*{Cohort Selection}
+%Participants of the MAGENTA study include non-Hispanic whites, African Americans and Hispanics (Puerto Ricans, Cubans, and Peruvians). 
+All participants in the MAGENTA study were recruited through previous studies of AD, including Feliciano-Astacio et al., 2019, Marca-Ysabel et al., 2021, and Griswold et al., 2020. Blood samples were taken for all individuals ascertained and processed at the following sites: the University of Miami Miller School of Medicine (Miami, FL, US), Wake Forest University (Winston-Salem, NC, US), Case Western Reserve University (Cleveland, OH, US), Universidad Central Del Caribe (Bayamón, PR), and the Instituto Nacional de Ciencias Neurologicas (Lima, PE). Ascertainment protocols were consistent across sites and capture cognitive function, family history of AD/related dementias, sociodemographic factors, and dementia staging. All diagnoses were assigned by clinical experts following criteria for diagnosis and staging from the National Institute on Aging Alzheimer's Association (NIA-AA).
+
+The MAGENTA study is based on pre-existing sample collections which vary in terms of the demographic information collected for each participant.  Because the original ascertainment of MAGENTA study participants was international, different population descriptors were used across different ascertainment sites/cohorts. To facilitate comparisons relevant to understand the global differences noted in our study, we use a combination of geographic and race-based identifiers that are likely to best reflect underlying differences in genetic ancestry and admixture components. The label ``white'' is applied to legacy samples from North Carolina, Tennessee, and South Florida where participants either self-identified with this descriptor or were (in some legacy instances) administratively assigned as White race. The label ``African American'' is applied to samples collected via ascertainment in North Carolina and South Florida using population descriptors that specifically targeted enrollment of self-identified Black/African American participants. ``Puerto Rican'', ``Cuban'', and ``Peruvian'' labels are applied to samples collected as part of ascertainment efforts in these geographic areas.  While more precise descriptors of self-identity are preferred, the advanced age of study participants and the older dates of some sample collections make recontact to collect these data impossible.  All participants or their consenting proxy provided written informed consent as part of the study protocols approved by the site-specific Institutional Review Boards.
+
+\subsubsection*{Genetic data and ancestry analysis}
+Genome-wide SNP genotyping was previously performed as previously described for the MAGENTA study cohorts. Briefly, samples were genotyped on the Illumina Infinium Global Screening Array using standard quality control filters on call rate, quality, missingness, and Hardy-Weinberg equilibrium. 
+
+For our analyses, local ancestry calls were generated using the \textit{FLARE} software \citep{browning_fast_2023} with three reference panels from the 1000 Genomes Project: Utah residents with Northern and Western European ancestry (CEU),  Peruvians in Lima (PEL), and Yoruba in Ibadan, Nigeria (YRI). To estimate global ancestry proportions, we summed the haplotype lengths for each ancestry in each individual and divided by the total number of sites considered.
+
+\subsubsection*{Methylation profiles}
+DNA methylation was quantified using the Illumina HumanMethylation EPICv2.0 according to the manufacturer's instructions. Samples were randomized across plates and chips to ensure that ancestry, age, and sex were not confounded with each batch. All quality control and data normalization were performed using the the openSeSAMe pipeline from the SeSAMe \citep{wanding_zhou_sesame_2018} tools for analyzing Illumina Infinium DNA methylation arrays. Probes of poor design were removed from the analysis as well as probes with signal detection P-value \textgreater 0.05 in more than 5\% of the samples. Non-CG probes and probes located on the X, Y, and mitochondrial chromosomes were also removed. Samples with incomplete bisulfite conversion (GCT score \textgreater 1.5) and principal component analysis outliers were excluded. Noob normalization was performed with SeSAMe, using a nonlinear dye-bias correction. In addition, a principal components analysis of the  methylation data was performed. The MAGENTA samples did not stratify by sample plate, cohort, ethnicity, or ascertainment center along any of the first 2 principal components (percentage variance explained for PC1 = 14.96\% and PC2 = 6.83\%).
+
+
+\subsection{Estimating methylation age and its correlation with chronological age in the MAGENTA study}
+We applied multiple commonly used first-, second-, and third-generation methylation clocks to all individuals in the MAGENTA study with genome-wide methylation data. We used established implementations of the Horvath, Hannum, Zhang\_EN, Zhang\_BLUP, and PhenoAge clocks from the \textit{methylclock} R library \citep{pelegi-siso_methylclock_2021}. We also applied DunedinPACE, a third-generation clock separately, because it was not included in the \textit{methylclock} library \citep{belsky_dunedinpace_2022}. Because this clock does not explicitly predict age, it is not included in the analyses of correlation with biological age. Unless otherwise specified, default options were used for all clocks.
+
+The methylation clocks considered analyze different numbers of CpG sites. For each clock, the sites considered were taken from the \textit{methylclock} library or the original publication. In the case of missing data, the \textit{methylClock} library imputes methylation status using the \textit{mpute.knn} function from the \textit{impute} R library. The MAGENTA cohorts had low proportions of missing data for clock CpGs. Specifically, there were 3.7\% missing for the Horvath clock, 12.7\% for the Hannum clock, 4.5\% for the Zhang\_EN clock, 3.7\% for the PhenoAge clock, and 17.9\% for the DunedinPACE clock.
+
+We computed the Pearson correlation of estimated methylation age and chronological age for the controls in each cohort. To compare the strength of correlation between cohorts, we computed p-values for the observed differences using Fisher's z test and the Zou method for computing confidence intervals as implemented in the \textit{cocor} library \citep{diedenhofen_cocor_2015}. 
+
+\subsection{Computing methylation age acceleration in Alzheimer's disease patients and controls}
+In order to quantify methylation age acceleration from blood methylation data, we estimated raw, intrinsic, and extrinsic age acceleration for all clocks, except DunedinPACE, from the \textit{methylclock} library. Blood cell type composition differs between individuals and over the lifespan; thus, we report results in the main text using intrinsic age acceleration estimates, which capture age acceleration independently of blood cell proportions. We did not have access to empirical estimates of blood cell type counts for the data in MAGENTA, and as such estimated the counts using the functionality for deconvolution implemented in \textit{methylclock}, specifically with the ``blood gse35069 complete'' parameter. Given that cell type proportions vary between populations based on genetic ancestry, this is an inherent limitation of our study. Nevertheless, the biology of the aging process should be captured using this panel as a reference on our own datasets.
+
+Using the age acceleration estimates, we compared methylation age association between AD cases and matched controls using a Mann-Whitney U test, as implemented in the \textit{stats} library in R. We analyzed the study as a whole and stratified by cohort.
+
+\subsection{Independent validation cohorts}
+To evaluate the reproducibility of clock performance across ancestrally diverse 
+populations, we analyzed three independent datasets obtained from the NCBI Gene 
+Expression Omnibus (GEO) using the \texttt{GEOquery} R package. These cohorts 
+were: (1) a European-ancestry cohort from Sweden (GSE87571, 
+$N_{\mathrm{}{total}}=732$), (2) an African American cohort from the Genetic 
+Epidemiology Network of Arteriopathy study (GENOA; GSE210255, 
+$N_{\mathrm{total}}=1,394$), and (3) an African American cohort from the Grady Trauma 
+Project (GTP; GSE72680, $N_{\mathrm{total}}=422$). 
+
+Processed methylation beta-value matrices were loaded using the \textit{data.table} package. Probes with high missingness ($>5\%$) and detection $p$-value columns were removed prior to calculation. To ensure demographic alignment with the MAGENTA study cohort, we also analyzed subsets of each dataset including only individuals aged 55 years or older. This resulted in $n=280$ for the Swedish cohort, $n=865$ for the GENOA study, and $n=62$ for the GTP cohort. DNA methylation age (DNAmAge) was calculated using the \textit{methylclock} package. Clock performance was then quantified using the median absolute error (MAE), mean squared error (MSE), and Pearson correlation between predicted and chronological age.
+
+
+\subsection{Evaluating PC methylation clocks}
+We tested the PC versions of multiple methylation clocks using the \textit{PC Clock} R library~\citep{pcclocks_repo, higgins-chen_computational_2022}. We then generated the same accuracy metrics as for the ``regular'' versions of the clocks when applied to the MAGENTA cohorts and all three replicate cohorts.
+
+\subsection{Evaluating ensembles of age predictors}
+We tested the performance of a simple ensemble of age prediction methods at both estimating chronological age and distinguishing AD cases and controls. The ensemble was computed as the average of the estimate of each method on each individual. The resulting predictions were evaluated as described for each clock itself.
+
+\subsection{Identification of error-associated CpG sites}
+To identify specific CpG sites whose methylation levels were associated with increased 
+prediction error in the MAGENTA study individuals, we performed a site-wise association analysis across all CpG markers included in the Horvath, Hannum, and Zhang EN clock models. For each clock, we regressed absolute prediction error on the 
+normalized methylation beta values for each individual CpG site within the respective methylation clock. To account for multiple testing, $p$-values were 
+adjusted for each clock separately using the Benjamini-Hochberg (FDR) 
+correction methods. CpG sites were considered significantly associated with prediction 
+error if they had an FDR-adjusted p-value less than $0.05$.
+
+\subsection{Analysis of genetic variation at clock CpG sites}
+To test whether the CpG sites included in the methylation clocks are variable between individuals, we intersected all the clock CpGs with variants identified in version 3.0 of gnomAD \citep{karczewski_mutational_2020}. This database covers 76,156 individuals with whole genome sequencing harmonized from many large-scale sequencing studies. The intersection was performed using \textit{bedtools} in hg38 coordinates \citep{quinlan_bedtools_2010}.
+
+\subsection{Analysis of meQTL affecting clock CpGs}
+\subsubsection*{Identification of meQTL affecting clock CpGs}
+We integrated meQTL sets identified from blood samples by three independent studies. The first study  identified 11,165,559 meQTLs from 3,799 Europeans and 3,195 South Asians \citep{hawe_genetic_2022}. The second study  generated 4,565,687 meQTLs from 961 African Americans \citep{shang_meqtl_2023}. The final study (EPIGEN) identified 249,710 meQTLs from 2,358 UK individuals \citep{villicana_genetic_2023}. We filtered these sets separately on a false discovery rate  threshold of 0.05, correcting for multiple tests using the Benjamini-Hochberg method. These meQTL studies published their results in hg19 coordinates. To integrate with genetic variation and clock CpG data, we mapped the meQTL positions to hg38 using the UCSC liftOver tool \citep{hinrichs_ucsc_2006}. For each meQTL set, we intersected the target CpG site with the CpGs considered in each clock and then combined across meQTL sets to generate a set of clock CpGs with evidence of meQTL. 
+
+\subsubsection*{Population-level allele frequencies of meQTL affecting clock CpGs}
+We analyzed the frequency of clock CpG-affecting meQTLs within two different versions of gnomAD. We used version 4.1 to quantify the allele frequencies of these meQTLs in the following global populations: African, Middle Eastern, Admixed American, European (non-Finnish), South Asian, Ashkenazi Jewish, East Asian, European (Finnish), Amish, and a ``Remaining'' group defined by gnomAD as individuals that did not unambiguously cluster within these previous groups in a principal component analysis. We then used gnomAD version 3.1 to gather allele frequencies for local ancestry blocks identified in 7,612 Latino admixed individuals with varying proportions of European, Amerindigenous, and African ancestry.
+
+
+\subsection{Data availability}
+Raw IDATs and normalized beta matrices for the MAGENTA data are available on NCBI GEO (GSE338167), as well as the three validation datasets. Age predictions for all clocks mentioned in this article will be made available in tab-delimited format in the same Github repository in which all code used for these analyses is available.
+
+\subsection{Code availability}
+The publicly available code for analysis are available in the following repository: \url{https://github.com/seba2550/methyl-clocks-admixture}
+
+\subsection{Acknowledgements}
+First, we acknowledge the individuals who participated in the MAGENTA study. We are also grateful to members of the Capra Lab, Param Priya Singh, Gillian Meeks, Brenna Henn, and Shyamalika Gopalan for helpful feedback on the project.
+
+This work was supported by the National Institutes of Health (NIH) awards R35GM127087, R01AG070935, U01AG076482, U01AG072579, AG070864, AG072547, and AG074865. It was also supported by a Genentech-UCSF School of Pharmacy Diversity Fellowship to SCG.
+
+This work was conducted in part using the resources of the Wynton High Performance Compute cluster at the University of California, San Francisco.
+
+\subsection{Author Contributions}
+Conceptualization: SCG, JAC; Methodology: SCG, JAC; Investigation: SCG, JAC; Resources: EG, LG, MM, JMV, MLC, MRCO, BEFA, GSB, JLH, MAPV, AJG, WSB; Data Curation: SCG, EG, LG, MM, AJG, WSB; Writing – Original Draft: SCG, JAC; Writing - Review and Editing: SCG, AJG, WSB, JAC; Supervision: JAC; Project Administration: AJG, WSB, JAC; Funding Acquisition: SCG, AJG, WSB, JAC.
+
+\subsection{Competing interests}
+The authors declare no competing interests.
+
+\clearpage
+
+
+

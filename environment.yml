@@ -1,0 +1,27 @@
+name: methyl-clocks-admixture
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python>=3.9
+  - pandas
+  - numpy
+  - scipy
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - r-base>=4.0
+  - r-tidyverse
+  - r-patchwork
+  - r-cowplot
+  - r-ggpubr
+  - r-gridextra
+  - r-devtools
+  - r-boot
+  - r-readxl
+  - r-quadprog
+  - r-magick
+  - bioconda::bioconductor-geoquery
+  - bioconda::bioconductor-methylclock
+  - bioconda::bioconductor-biocmanager

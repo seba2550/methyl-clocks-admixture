@@ -1,0 +1,43 @@
+# Ignore R workspace and cache
+*.rds
+*.RData
+*.rdata
+*.Rhistory
+.Rhistory
+.Rproj.user/
+
+# Ignore large genomic data formats
+*.vcf
+*.vcf.gz
+*.vcf.gz.tbi
+*.idat
+*.bed
+*.chain
+*.chain.gz
+
+# Ignore zip and compressed archives
+*.zip
+*.tar.gz
+*.gz
+
+# Ignore general text data files
+*.txt
+*.tsv
+*.csv
+
+# Whitelist small coordination/reference files inside data/
+!data/*.csv
+!data/*.bed
+!data/*.rds
+!data/*.pdf
+!data/genotyping_data/
+!data/genotyping_data/*.txt
+!data/replication/
+!data/replication/*.csv
+
+# OS generated files
+.DS_Store
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db

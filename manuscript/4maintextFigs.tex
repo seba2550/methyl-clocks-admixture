@@ -1,0 +1,92 @@
+% Create a "code name" for each figure. In the maintext, when you want that figure to appear in the manuscript call that function (e.g. \figCodeName).
+
+%%%% Create and format Figure with subpanels: %%%%
+% \generateFigSubpanels[optionalRotationDegrees]{figCodeName}{figureNamePath}{size:propOfTextwidth}
+%     {main caption}
+%     {{
+%         {subcaption1},
+%         {subcaption2},
+%         {subcaption3}
+%     }}
+
+% Then in the reference your figures with \cref{fig:figCodeName} and Reference subpanels with \cref{fig:figCodeName:A}
+
+
+%%%% Function to create and format figures without subpanels %%%%
+
+% \generateFig[optionalRotationDegrees]{figCodeName}{figureNamePath}{size:propOfTextwidth}
+%     {Bold text main caption}
+%     {Smaller normal text caption}
+
+% Then in the main text reference your figures with \cref{fig:figCodeName}
+
+% You can also use \generateSidwaysFigSubpanels or \generateSidewaysFig to rotate the caption with the figure.
+
+%%%% Example figure with codename: figureSuggestions %%%%
+\generateFig{schematic}
+{main_figs/Figure1.pdf}{1}
+    {Schematic of the workflow of the study.}
+    {We analyzed genome-wide methylation and genotyping data from blood samples from 621 AD and non-demented control individuals from the MAGENTA study. To replicate our findings, we analyzed data from 1,394 healthy African Americans from the GENOA study, 422 healthy African Americans from the Grady Trauma Project, and 729 healthy Whites from the NSPHS study. We applied a set of first-, second-, and third-generation methylation clocks to the individuals and estimated their genetic ancestry. This enabled us to explore the performance of methylation clocks in individuals with different genetic ancestries.}
+    
+\generateFig{correlationsancestry}
+{main_figs/Figure2.pdf}{1}
+    {Methylation clock accuracy is lower in cohorts with substantial African genetic ancestry.}
+    {{
+        {\textbf{A}: Pearson correlation between chronological age and DNAm age predicted by the Horvath clock for controls in the White MAGENTA cohort. The correlation of $r = 0.72$ is consistent with previous studies of similar age groups.}
+        {\textbf{B}: Pearson correlation between chronological age and DNAm age predicted by the Horvath clock for the genetically admixed cohorts in MAGENTA. For each cohort, the adjacent boxplots display the distribution of global ancestry proportions: European (CEU, red), African (YRI, green), and Amerindigenous (PEL, blue). The cohorts with substantial African ancestry---African Americans and Puerto Ricans---exhibit lower correlations ($r = 0.51$ and $0.45$, respectively) compared to the Cubans ($r = 0.68$) and Peruvians ($r = 0.72$).}
+        {\textbf{C}: Relative accuracy of the Horvath clock across cohorts compared to Whites. The bar plot shows the difference in Pearson correlation coefficients relative to the White cohort baseline ($r = 0.72$). Asterisks indicate a statistically significant difference from the baseline (* \textit{p} $<$ 0.05).}
+    }}
+
+\generateFig{magentareplication}
+{main_figs/Figure3.pdf}{1}
+    {Lower methylation clock accuracy in African Americans holds across cohorts.}
+    {{
+        Scatter plots of chronological age versus Horvath DNAm age in three independent replication cohorts: Swedish Whites (NSPHS), GENOA Study African Americans, and Grady Trauma Project African Americans.
+        \textbf{Top Row}: Age predictions for the full age range of each cohort. The Swedish White cohort exhibits the highest accuracy ($r = 0.97$, MAE = 3.04), while both African American cohorts show lower correlations ($r = 0.85$ and $r = 0.88$) and higher error rates (MAE = 3.83 and 5.14, respectively).
+        \textbf{Bottom Row}: Age predictions restricted to individuals $\ge$ 55 years old, similar to the demographics of the MAGENTA cohorts. In this age-restricted subset, the disparity in clock performance is consistent, with the Swedish White cohort maintaining a significantly higher correlation ($r = 0.80$) compared to the GENOA ($r = 0.67$) and Grady ($r = 0.49$) African American cohorts.
+    }}
+
+\generateFig{accuracymultipleclocks}
+{main_figs/Figure4.pdf}{1}
+    {Lower methylation clock accuracy in cohorts with African ancestry holds across multiple clocks.}
+    {{
+        Pearson correlation coefficients between chronological age and DNAm age predicted by the \textbf{Horvath} (top), \textbf{Hannum} (middle), and \textbf{Zhang\_EN} (bottom) clocks across all MAGENTA and replication (GENOA, Grady, Swedish) cohorts.
+        The vertical dashed line in each panel represents the baseline correlation observed in the MAGENTA White cohort.
+        Cohorts with substantial African ancestry (African American and Puerto Rican, red bars) consistently exhibit lower correlations compared to Whites, Peruvians, and Cubans across all three clock models.
+        Asterisks indicate a statistically significant difference in correlation compared to the White MAGENTA cohort baseline (* \textit{p} $<$ 0.05).
+    }}
+
+\generateFig{alzheimersanalysis}
+{main_figs/Figure5.pdf}{1}
+    {Methylation clocks do not consistently identify accelerated aging in admixed Alzheimer's cohorts.}
+    {{
+        {\textbf{A}: Comparison of the distributions of Horvath intrinsic age acceleration for AD patients and non-demented controls for each of the admixed cohorts in MAGENTA. AD patients do not show significantly higher age acceleration in any of the admixed cohorts. In contrast, the AD cases had significantly greater acceleration than controls in the white cohort (\textbf{Supplementary Figure 6}). NS = Not significant.}
+        {\textbf{B}: Median differences (in years) in intrinsic age acceleration between AD patients and non-demented controls for five methylation clocks for each cohort in MAGENTA. The clocks do not consistently identfy accelerated aging in AD across cohorts, and the results also vary within cohorts. * \textit{p} $<$ 0.05.}
+    }}
+
+% \generateFig{meqtlsgnomAD}
+% {%main_figs/Figure5.pdf}{0.53}
+%     {Common meQTLs affect most Horvath clock CpGs and vary in frequency across ancestries.}
+%     {
+%         {\textbf{A}: The allele frequency distribution of the 29,033 unique variants associated with methylation levels at Horvath clock CpGs. Allele frequencies were computed over the 76,215 genomes in gnomAD version 4.1. Inset: Out of the 353 CpGs in the Horvath clock, 271 (77\%) have at least one meQTL, i.e., a genetic variant that is associated with methylation level.}
+%         {\textbf{B}: Clock meQTL have significantly higher alelle frequency in individuals with African genetic ancestry from gnomAD than all other ancestry groups (median 0.068 for African vs. 0.004--0.046; p $<$ $3.85 \times 10^{-25}$). }
+%         {\textbf{C}: Clock meQTL have significantly higher allele frequency on African local ancestry genomic segments in 7,612 Latino admixed individuals with varying proportions of European, American, and African ancestry from gnomAD. Inset: The distribution of difference in frequencies for each meQTL for each pair of populations.} 
+%     }
+
+\generateFig{meqtlsallclocks}
+{main_figs/Figure6.pdf}{1}
+    {Genetic variants with different frequencies between ancestries associate with methylation levels at clock CpGs.}
+    %Many methylation QTL (meQTL) for clock CpGs differ in frequency between populations.
+    %Ancestry-specific genetic variants (meQTLs) drive Horvath clock error in African ancestry populations.
+    %Ancestry-differentiated variants associate with methylation levels at clock CpGs.
+    {{
+        {\textbf{A}: Percentage of CpG sites in each methylation clock that exhibit differential methylation in whole blood between individuals of African vs. European ancestry.}
+        {\textbf{B}: Methylation levels at some clock CpG sites significantly associate with error across MAGENTA individuals CpGs for each first generation clock are sorted based on the multiple-testing-corected significance of their association with clock error in MAGENTA.}
+        {\textbf{C}: The allele frequency distribution of the single nucletide variants that disrupt CpG sites considered by the Horvath clock in 76,156 individuals from gnomAD (v3.0). Of the 353 clock CpG sites, 245 (69\%) have at least one variant, but nearly all the variants are very rare.
+        }
+        {\textbf{D}: Number of CpGs in each clock that are influenced by methylation quantitative trait loci (meQTLs). The Horvath clock contains 271 meQTL-associated CpGs, substantially more than the Hannum, EN, PhenoAge, or DunedinPACE clocks.
+        }
+        {\textbf{E}: Clock meQTL have significantly higher alelle frequency in individuals with African genetic ancestry from gnomAD than all other ancestry groups (median 0.068 for African vs. 0.004--0.046; p $<$ $3.85 \times 10^{-25}$).}
+        {\textbf{F}: Frequency of meQTL variants in the MAGENTA cohorts. Non-differentiated meQTLs (left) have similar frequencies across cohorts, but African-differentiated meQTLs (right) are significantly more frequent in African Americans (AA) and Puerto Ricans (PR) compared to Peruvians (PER) and Cubans (CUB).}
+        {\textbf{G}: Venn diagrams illustrating the overlap between CpGs that contribute to clock prediction error (``Error-associated'', blue) and those influenced by meQTLs (``meQTL affected'', pink) for the first-generation clocks.}
+    }}
